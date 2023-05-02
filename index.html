@@ -51,8 +51,8 @@
         console.log(55, window.location.search)
 
         let numRedirect = getQueryVariableForRedirect('redirect404')
-        var redirect = sessionStorage[`redirect${numRedirect}`]
-        delete sessionStorage[`redirect${numRedirect}`]
+        var redirect = localStorage[`redirect${numRedirect}`]
+        delete localStorage[`redirect${numRedirect}`]
 
         if (redirect && redirect != location.href) {
           history.replaceState(null, null, redirect)

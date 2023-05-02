@@ -3,9 +3,10 @@
 <html lang="en">
   <head>
     <script>
-      const numRedirects = Number.parseInt(sessionStorage?.numRedirects || '0') + 1
+      const numRedirects = Number.parseInt(localStorage?.numRedirects || '0') + 1
       console.log({ numRedirects })
-      sessionStorage[`redirect${numRedirects}`] = location.href
+      localStorage.numRedirects = numRedirects
+      localStorage[`redirect${numRedirects}`] = location.href
 
       let meta = document.createElement('meta')
       meta.httpEquiv = 'refresh'
