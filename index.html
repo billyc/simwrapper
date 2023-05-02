@@ -35,11 +35,25 @@
 
     <!-- github pages hack: allows single-page-app to handle arbitrary URLs -->
     <script>
+      function getQueryVariableForRedirect(variable) {
+        var query = window.location.search.substring(1)
+        var vars = query.split('&')
+        for (var i = 0; i < vars.length; i++) {
+          var pair = vars[i].split('=')
+          if (pair[0] == variable) {
+            return pair[1]
+          }
+        }
+        return false
+      }
+
       ;(function () {
         console.log(55, window.location.search)
 
-        var redirect = sessionStorage.redirect
-        delete sessionStorage.redirect
+        let numRedirect = getQueryVariableForRedirect('redirect404')
+        var redirect = sessionStorage[`redirect${numRedirect}`]
+        delete sessionStorage[`redirect${numRedirect}`]
+
         if (redirect && redirect != location.href) {
           history.replaceState(null, null, redirect)
         }
@@ -69,8 +83,8 @@
       rel="stylesheet"
     />
     <script type="module" crossorigin src="/simwrapper/assets/index.5c7ab6e8.js"></script>
-    <link rel="modulepreload" href="/simwrapper/assets/vendor.911ae443.js">
-    <link rel="stylesheet" href="/simwrapper/assets/index.851e1cf5.css">
+    <link rel="modulepreload" href="/simwrapper/assets/vendor.911ae443.js" />
+    <link rel="stylesheet" href="/simwrapper/assets/index.851e1cf5.css" />
   </head>
   <body>
     <div id="app"></div>
